@@ -1,0 +1,179 @@
+/* css for the mapchart */
+body {
+    overflow-x: hidden;
+  }
+  #info {
+    width: 100%;
+    padding-left: 36px;
+    padding-right: 36px;
+  }
+  #map-holder {
+    width: 100vw;
+    height: calc(100vh - 200px);
+    padding: 30px;
+  }
+  svg {border-radius: 8px;}
+  svg rect {
+    fill: #f8f9fa;
+    border-radius: 8px;
+  }
+  .country {
+    fill: #d0d0d0; /* country colour */
+   /* stroke: #2a2c39; /* country border colour */
+      stroke-width: 0.6; /* country border width */
+  }
+  .country-on {
+    fill: #4b5358  !important; /* highlight colour for selected country */
+  }
+  .countryLabel {
+    display: none; /* hide all country labels by default */
+  }
+  .countryName {
+    fill: black; /* country label text colour */
+    font-family: "Inter", sans-serif;
+  }
+  .countryLabelBg {
+    fill:rgba(240, 240, 240, 0.75); /* country label background colour */
+    box-shadow:rgb(106, 102, 102);
+     z-index: 9999 !important;
+
+  }
+
+  /* it set the color of the search bar inside the select picker */
+  .form-control:focus{
+    border-color:rgb(170, 42, 42) !important;
+    box-shadow: 0 0 0 0.2rem rgba(170, 42, 42, 0.25) !important;
+  }
+  
+ /* it set the bold font fot the subgroups titles in the select picker */
+  .dropdown-header {
+    font-weight: bold;
+    color:black;
+}
+
+#ChoroplethButton{
+  width: 180px;
+}
+
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+  width: 140px !important;
+}
+
+
+.select-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.select-wrapper-choropleth{
+display: flex !important;
+flex-direction: row!important;
+gap: 16px!important;
+width: 50%!important;
+margin-right: 25px;
+
+}
+
+/* css for toggle button */
+
+    .toggle {
+      --width: 180px;
+      --height: 38px;
+
+      position: relative;
+      display: inline-block;
+      width: var(--width);
+      height: var(--height);
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+      border-radius: var(--height);
+      cursor: pointer;
+    }
+
+    .toggle input {
+      caret-color: transparent;
+      /* display: none; */
+    }
+
+    .toggle .slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--height);
+      background-color: #ccc;
+      transition: all 0.4s ease-in-out;
+      caret-color: transparent;
+    }
+
+    .toggle .slider::before {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 2px;
+      width: 30px;
+      height: 30px;
+      border-radius: 30px;
+      background-color: #fff;
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+      transition: all 0.4s ease-in-out;
+      caret-color: transparent;
+    }
+
+    .toggle input:checked+.slider {
+      background-color:rgb(170, 42, 42);
+      caret-color: transparent;
+    }
+
+    .toggle input:checked+.slider::before {
+      transform: translateX(calc(var(--width) - var(--height)));
+      caret-color: transparent;
+    }
+
+    .toggle .labels {
+      position: absolute;
+      top: 9px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 0.8rem;
+      font-family: "Inter", sans-serif;
+      transition: all 0.4s ease-in-out;
+      caret-color: transparent;
+    }
+
+    .toggle .labels::after {
+      content: attr(data-off);
+      position: absolute;
+      left: 41px;
+      font-family: "Inter", sans-serif;
+      font-size: 0.8rem;
+      right: 5px;
+      color: #4d4d4d;
+      opacity: 1;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+      transition: all 0.4s ease-in-out;
+    }
+
+    .toggle .labels::before {
+      content: attr(data-on);
+      position: absolute;
+      left: 12px;
+      color: #ffffff;
+      opacity: 0;
+      font-family: "Inter", sans-serif;
+      font-size: 0.8rem;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4);
+      transition: all 0.4s ease-in-out;
+
+    }
+
+    .toggle input:checked~.labels::after {
+      opacity: 0;
+      caret-color: transparent;
+    }
+
+    .toggle input:checked~.labels::before {
+      opacity: 1;
+      caret-color: transparent;
+    }

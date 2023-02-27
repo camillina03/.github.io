@@ -1,0 +1,42 @@
+/* css for the piechart */
+.arc path {
+  stroke: white;
+}
+
+.title {
+  fill: rgb(30, 28, 28);
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 20px;
+}
+
+.font {
+  font-size: 18px;
+}
+
+
+.footer {
+  padding-top: 50px;
+  text-align: center;
+  list-style-type: none;
+}
+
+.tooltipPie {
+
+  z-index: 10;
+  visibility: hidden;
+  border-radius:100;
+  padding: 2px 2px;
+  font-family: "Roboto",sans-serif;
+  font: 20px bold;
+  color: rgba(88, 88, 88, 0.749);
+  left: 210px;
+  top: 210px;
+  position: absolute;
+  text-align: center;
+  width: 210px;
+  height: 80px;
+
+}

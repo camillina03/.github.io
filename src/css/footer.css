@@ -1,0 +1,15 @@
+
+/* css for the footer */
+footer {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    min-height: 120px;
+    padding: 60px 40px;
+  }
+  
+  footer h3, footer h4, footer p  {
+    margin: 0 !important;
+  }

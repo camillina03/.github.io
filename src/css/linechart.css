@@ -1,0 +1,17 @@
+/* css for the linechart */
+.line {
+    fill: none;
+    stroke-width: 1px;
+}
+
+.axis path {
+    stroke: black;
+    stroke-width: 1px;
+    fill: none;
+    shape-rendering: crispEdges;
+}
+
+.tick line {
+    stroke: black;
+    stroke-width: 1px;
+}

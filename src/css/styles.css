@@ -1,0 +1,166 @@
+/* css for the barchart and the Chart page */
+.chart-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    position: relative;
+}
+
+ .select-wrapper{ 
+    display: flex;  
+    flex-direction: column;  
+     gap: 2px;  
+ }  
+
+.hint {
+    font-size: 12px;
+    color: gainsboro;
+    padding-left: 6px;
+    font-family: "Roboto",sans-serif;
+}
+
+p {
+    margin:0;
+    font-family: "Roboto",sans-serif;
+}
+
+.filters{
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+
+
+.filters .select-wrapper {
+    flex: 1;
+}
+
+
+.filters .select-wrapper .dropdown {
+    flex: 1;
+}
+
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: auto !important;
+}
+
+text .label{
+    font-family: "Roboto",sans-serif;
+    font-size:  small;
+}
+
+:root {
+  --bg-color: #fbfbfb;
+  --color: #3f3d56;
+  --orange: #d88484;
+  --red: #aa2a2a;
+}
+
+.orange {
+  background-color: var(--orange);
+  color: black;
+}
+
+.red {
+  background-color: var(--red);
+  color: white;
+}
+
+* {
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    height: 100%;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    background-color: var(--bg-color);
+    color: var(--color);
+    font-family: "Roboto", sans-serif;
+  }
+  body {
+    margin: 0;
+  }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.4rem !important;
+}
+p, span {
+  font-size: 0.8rem;
+}
+@media (min-width: 768px) {
+  h2 {
+    font-size: 2rem !important;
+  }
+  p, span {
+    font-size: 0.95rem;
+  }
+}
+
+.divider {
+    width: 200px;
+    height: 2px;
+    background-color: rgb(170, 42, 42);
+    margin: 18px 0;
+  }
+
+  .btn-group {
+    gap: 8px;
+  }
+
+.btn-primary{
+    font-family: "Roboto", sans-serif;
+    background-color:  #5e595962;
+    border-color:   #cccacae7;
+}
+
+.dropdown-item.active{
+
+    background-color: rgb(170, 42, 42) ;
+
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: rgb(170, 42, 42) !important;
+
+}
+
+.btn-primary:hover {
+    background-color: rgb(170, 42, 42) !important;
+}
+
+
+  /* it set the color of the search bar inside the select picker */
+  .form-control:focus{
+    border-color:rgb(170, 42, 42) !important;
+    box-shadow: 0 0 0 0.2rem rgba(170, 42, 42, 0.25) !important;
+  }
+  
+
+  .dropdown-item .selected{
+
+    background-color:rgb(170, 42, 42) !important;
+
+  }
+
+  /* rect{
+    fill: rgb(170, 42, 42) ;
+  } */
+
+  svg * {
+    transition: all 600ms ease-in-out;
+  }

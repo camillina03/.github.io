@@ -1,0 +1,19 @@
+/* css for the stacked and grouped barchart */
+.axis text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12pt;
+  }
+  .axis .label {
+    font-size: 20pt;
+  }
+
+  .axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  .color-legend text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12pt;
+  }
