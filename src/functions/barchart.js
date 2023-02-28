@@ -183,7 +183,7 @@ function CreateBarchartDefault() {
       .on("mouseover", mouseover)
       .on("mouseleave", mouseleave)
       .append("title")
-      .text((d) => SelectData(findChosenBarchart(), d));
+      .text((d) => nf.format(SelectData(findChosenBarchart(), d)));
   });
 }
 
@@ -253,7 +253,7 @@ function UpdateBarchart(chosenBarchart, data) {
           .on("mouseover", mouseover)
           .on("mouseleave", mouseleave)
           .append("title")
-          .text((d) => SelectData(findChosenBarchart(), d)),
+          .text((d) => nf.format(SelectData(findChosenBarchart(), d)),
 
       (update) =>
         update
@@ -268,7 +268,7 @@ function UpdateBarchart(chosenBarchart, data) {
           .attr("fill", "var(--red)")
           .select("title")
           .text((d) => {
-            return SelectData(findChosenBarchart(), d);
+            return nf.format(SelectData(findChosenBarchart(), d));
           }),
       (exit) => exit.remove()
     );
