@@ -320,26 +320,26 @@ function SortByFunction(sort, order) {
     if (sort == "SortByDeaths") {
       if (findChosenBarchart() == 0) {
         datasetDefault.sort(function (a, b) {
-          return a.DeathsFinalForEachCountry - b.DeathsFinalForEachCountry;
+          return b.DeathsFinalForEachCountry - a.DeathsFinalForEachCountry;
         });
         UpdateBarchart(findChosenBarchart(), datasetDefault);
       } else if (findChosenBarchart() == 1) {
         datasetDefault.sort(function (a, b) {
           return (
-            a.DeathsAsPercentageOfPopulation - b.DeathsAsPercentageOfPopulation
+            b.DeathsAsPercentageOfPopulation - a.DeathsAsPercentageOfPopulation
           );
         });
         UpdateBarchart(findChosenBarchart(), datasetDefault);
       } else {
         datasetDefault.sort(function (a, b) {
-          return a.WW2DeathsToNationalRatio - b.WW2DeathsToNationalRatio;
+          return b.WW2DeathsToNationalRatio - a.WW2DeathsToNationalRatio;
         });
         UpdateBarchart(findChosenBarchart(), datasetDefault);
       }
     } else {
       //(sort == "SortByName")
       datasetDefault.sort(function (a, b) {
-        return a.Nationality.localeCompare(b.Nationality);
+        return b.Nationality.localeCompare(a.Nationality);
       });
       UpdateBarchart(findChosenBarchart(), datasetDefault);
     }
@@ -358,13 +358,13 @@ function SortByFunction(sort, order) {
       } else if (findChosenBarchart() == 1) {
         datasetDefault.sort(function (a, b) {
           return (
-            b.DeathsAsPercentageOfPopulation - a.DeathsAsPercentageOfPopulation
+            a.DeathsAsPercentageOfPopulation - b.DeathsAsPercentageOfPopulation
           );
         });
         UpdateBarchart(findChosenBarchart(), datasetDefault);
       } else {
         datasetDefault.sort(function (a, b) {
-          return b.WW2DeathsToNationalRatio - a.WW2DeathsToNationalRatio;
+          return a.WW2DeathsToNationalRatio - b.WW2DeathsToNationalRatio;
         });
         UpdateBarchart(findChosenBarchart(), datasetDefault);
       }
@@ -372,7 +372,7 @@ function SortByFunction(sort, order) {
       // (sort == "SortByName")
 
       datasetDefault.sort(function (a, b) {
-        return b.Nationality.localeCompare(a.Nationality);
+        return a.Nationality.localeCompare(b.Nationality);
       });
       UpdateBarchart(findChosenBarchart(), datasetDefault);
     }
