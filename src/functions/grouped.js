@@ -6,6 +6,14 @@ var nf = Intl.NumberFormat(); //variable for formatting number using . for separ
 
 chosenBarchart = "stacked";
 
+function debounce(func) {
+  var timer;
+  return function (event) {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(func, 100, event);
+  };
+}
+
 function mouseover(d) {
   d3.select(this).style("stroke", "black").style("opacity", 0.6);
 }
@@ -77,17 +85,24 @@ function CreateStackedBarchartDefault() {
   svgGlobalStacked = d3
     .select("#stacked-container")
     .append("svg")
-    .attr("width", $("#stacked-container").width() - 80)
-    .attr("height", 600)
+    .attr("width", $("#stacked-container").width())
+    .attr("height", 1100)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.bottom + ")");
 
-  $(window).resize(function () {
-    if (svgGlobalStacked)
-      svgGlobalStacked
-        .attr("width", $("#stacked-container").width())
-        .attr("height", 600);
-  });
+  $(window).resize(
+    debounce(function () {
+      if (svgGlobalStacked)
+        d3.select("#stacked-container")
+          .select("svg")
+          .attr("width", $("#stacked-container").width());
+
+      Update(
+        $("#selectStackedGroupedButton").val(),
+        $("#OrderByButtonStacked").val()
+      );
+    })
+  );
 
   //read the data from the csv and save it in the dedicated global variable datasetFromCsv
   d3.csv("../datasets/csv/army-citizien.csv").then(function (data) {
@@ -139,7 +154,7 @@ function Update(chosenB, order) {
 function updateStacked(order) {
   var margin = { top: 20, right: 70, bottom: 20, left: 160 };
 
-  var innerHeight = 600 - margin.top - margin.bottom;
+  var innerHeight = 1100 - margin.top - margin.bottom;
   var innerWidth =
     $("#stacked-container").width() - 80 - margin.left - margin.right;
 
@@ -185,7 +200,7 @@ function updateStacked(order) {
     .select("#xaxis")
     .attr("transform", "translate(0," + innerHeight + ")")
 
-    .call(d3.axisBottom(xScale));
+    .call(d3.axisBottom(xScale).ticks(4));
 
   svgGlobalStacked.select("#yaxis").call(d3.axisLeft(y0Scale));
 
@@ -214,7 +229,7 @@ function updateStacked(order) {
 function updateGroupedBar(order) {
   var margin = { top: 20, right: 70, bottom: 20, left: 160 };
 
-  var innerHeight = 600 - margin.top - margin.bottom;
+  var innerHeight = 1100 - margin.top - margin.bottom;
   var innerWidth =
     $("#stacked-container").width() - 80 - margin.left - margin.right;
 
@@ -261,7 +276,7 @@ function updateGroupedBar(order) {
   svgGlobalStacked
     .select("#xaxis")
     .attr("transform", "translate(0," + innerHeight + ")")
-    .call(d3.axisBottom(xscale));
+    .call(d3.axisBottom(xscale).ticks(4));
 
   svgGlobalStacked.select("#yaxis").call(d3.axisLeft(yscale));
 

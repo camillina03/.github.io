@@ -4,6 +4,14 @@ var datasetFromCsv;
 var datasetDefault;
 var nf = Intl.NumberFormat(); //variable for formatting number using . for separating  thousands
 
+function debounce(func) {
+  var timer;
+  return function (event) {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(func, 100, event);
+  };
+}
+
 var mouseover = function (d) {
   d3.select(this).style("stroke", "black").style("opacity", 0.6);
 };
@@ -72,16 +80,21 @@ function CreateBarchartDefault() {
   svgGlobal = d3
     .select("#barchart-container")
     .append("svg")
-    .attr("width", $("#barchart-container").width() - margin.right)
-    .attr("height", 720)
+    .attr("width", $("#barchart-container").width())
+    .attr("height", 1100)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  $(window).resize(function () {
-    svgGlobal
-      .attr("width", $("#barchart-container").width())
-      .attr("height", 720);
-  });
+  $(window).resize(
+    debounce(function () {
+      console.log("resize");
+      d3.select("#barchart-container")
+        .select("svg")
+        .attr("width", $("#barchart-container").width());
+
+      UpdateBarchart(findChosenBarchart(), datasetDefault);
+    })
+  );
 
   // //save the SVG in the dedicated global variable
   // svgGlobal = svg;
@@ -127,13 +140,13 @@ function CreateBarchartDefault() {
           return SelectData(0, d);
         }),
       ])
-      .range([0, $("#barchart-container").width()]);
+      .range([0, $("#barchart-container").width() - 200]);
 
     svgGlobal
       .append("g")
       .attr("class", "x axis")
-      .attr("transform", "translate(0," + 600 + ")")
-      .call(d3.axisBottom(xScale))
+      .attr("transform", "translate(0," + 1000 + ")")
+      .call(d3.axisBottom(xScale).ticks(4))
       .selectAll("text")
       .attr("transform", "translate(-10,0)rotate(-45)")
       .style("text-anchor", "end");
@@ -146,7 +159,7 @@ function CreateBarchartDefault() {
           return d.Nationality;
         })
       )
-      .range([0, 600])
+      .range([0, 1000])
       .padding(0.1);
 
     svgGlobal.append("g").attr("class", "y axis").call(d3.axisLeft(yScale));
@@ -188,11 +201,11 @@ function UpdateBarchart(chosenBarchart, data) {
         return SelectData(chosenBarchart, d);
       }),
     ])
-    .range([0, $("#barchart-container").width()]);
+    .range([0, $("#barchart-container").width() - 200]);
 
   svgGlobal
     .select(".x.axis")
-    .call(d3.axisBottom(xScale))
+    .call(d3.axisBottom(xScale).ticks(4))
     .selectAll("text")
     .attr("transform", "translate(-10,0)rotate(-45)")
     .style("text-anchor", "end");
@@ -205,7 +218,7 @@ function UpdateBarchart(chosenBarchart, data) {
         return d.Nationality;
       })
     )
-    .range([0, 600])
+    .range([0, 1000])
     .padding(0.1);
 
   svgGlobal

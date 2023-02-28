@@ -2,15 +2,15 @@ function pieVis() {
   var nf = Intl.NumberFormat(); //variable for formatting number using . for separating  thousands
 
   var margin = { top: 10, right: 5, bottom: 100, left: 5 },
-    width = 600,
+    width = 300,
     height = 600;
-  innerWidth = width - margin.left - margin.right;
+  innerWidth = width;
   innerHeight = height - margin.top - margin.bottom;
   // find the min of width and height and devided by 2
   radius = Math.min(width, height) / 2;
 
-  var outerRadius = innerWidth / 3.7;
-  var innerRadius = innerWidth / 5;
+  var outerRadius = innerWidth / 2.6;
+  var innerRadius = innerWidth / 3.6;
 
   // legend dimensions
   var legendCircleSize = 5;
@@ -22,7 +22,7 @@ function pieVis() {
   var svg = d3
     .select("#pie")
     .append("svg")
-    .attr("width", width + margin.left + margin.right)
+    .attr("width", width)
     .attr("height", height - 120 + margin.top + margin.bottom)
     .append("g");
 
@@ -72,7 +72,6 @@ function pieVis() {
       d.enabled = true;
     });
 
-
     // create a tooltip
     var tooltip = d3.select("#pie").append("div").attr("class", "tooltipPie");
 
@@ -104,12 +103,12 @@ function pieVis() {
     chart.on("mousemove", function (d) {
       tooltip.html(
         "<br>Holocaust victimins<br><br>" +
-        d3.select(this).datum().data.Nationality.toUpperCase() +
-        "<br> " +
-        d3.select(this).datum().data.Percentage +
-        "%" +
-        "<br>" +
-        nf.format(d3.select(this).datum().data.Deaths)
+          d3.select(this).datum().data.Nationality.toUpperCase() +
+          "<br> " +
+          d3.select(this).datum().data.Percentage +
+          "%" +
+          "<br>" +
+          nf.format(d3.select(this).datum().data.Deaths)
       );
     });
 
@@ -205,12 +204,12 @@ function pieVis() {
       .on("mousemove", function (d) {
         tooltip.html(
           "<br> Holocaust victmins:<br><br>" +
-          d3.select(this).datum().Nationality.toUpperCase() +
-          "<br>" +
-          d3.select(this).datum().Percentage +
-          "%" +
-          "<br>" +
-          nf.format(d3.select(this).datum().Deaths)
+            d3.select(this).datum().Nationality.toUpperCase() +
+            "<br>" +
+            d3.select(this).datum().Percentage +
+            "%" +
+            "<br>" +
+            nf.format(d3.select(this).datum().Deaths)
         );
       })
       .on("mouseout", function (d) {

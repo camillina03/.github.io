@@ -11,7 +11,7 @@ var selectedCities = [];
 var citiesDataset = [];
 var nf = Intl.NumberFormat(); //variable for formatting number using . for separating  thousands
 
-//it inizialize the main and the city selector 
+//it inizialize the main and the city selector
 $(document).ready(function () {
   main();
   $("#citySelector").on("change", function () {
@@ -246,18 +246,13 @@ function main() {
       .attr("dx", 0)
       .attr("dy", 5)
       .html(function (d) {
-
         var Deathsvalue = d.properties.value ? d.properties.value : "";
-        if (Deathsvalue == "") return "\n Country : " + d.properties.name
-
+        if (Deathsvalue == "") return "\n Country : " + d.properties.name;
         else {
-
-          var t = " Deaths: " + nf.format(Deathsvalue)
+          var t = " Deaths: " + nf.format(Deathsvalue);
           var temp = "<tspan x=" + 0 + " dy=" + 20 + ">" + t + "</tspan>";
           return "\n Country : " + d.properties.name + temp;
-
         }
-
       })
       .call(getTextBox);
     // add a background rectangle the same size as the text
@@ -312,7 +307,6 @@ function showcities() {
     .domain(valueExtent) // What's in the data
     .range([1, 100]); // Size in pixel
 
-
   var cityLabels = countriesGroup
     .selectAll("circle")
     .data(citiesDataset, (d) => d.city)
@@ -324,8 +318,12 @@ function showcities() {
     })
     .attr("transform", function (d) {
       return (
-        "translate(" + projection([+d.long, +d.lat])[0] + "," + projection([+d.long, +d.lat])[1] + ")"
-      )
+        "translate(" +
+        projection([+d.long, +d.lat])[0] +
+        "," +
+        projection([+d.long, +d.lat])[1] +
+        ")"
+      );
     });
 
   cityLabels
@@ -335,14 +333,11 @@ function showcities() {
     .attr("dx", 0)
     .attr("dy", 5)
     .html(function (d) {
-
-      var t = " Deaths: " + nf.format(d.deaths)
+      var t = " Deaths: " + nf.format(d.deaths);
       var temp = "<tspan x=" + 0 + " dy=" + 20 + ">" + t + "</tspan>";
       return "\n City : " + d.city + temp;
-
     })
     .call(getTextBox);
-
 
   cityLabels
     .insert("rect", "text")
@@ -356,8 +351,6 @@ function showcities() {
     .attr("height", function (d) {
       return d.bbox.height;
     });
-
-
 
   var x = countriesGroup.selectAll("circle").data(citiesDataset, (d) => d.city);
 
@@ -381,11 +374,7 @@ function showcities() {
         .duration(200)
         .delay(0);
 
-
-      d3.select("#cityLabel" + d.city).style(
-        "display",
-        "block"
-      );
+      d3.select("#cityLabel" + d.city).style("display", "block");
     })
     .on("mouseout", function (d, i) {
       d3.select(this)
@@ -393,12 +382,8 @@ function showcities() {
         .transition()
         .duration(200)
         .delay(0);
-      d3.select("#cityLabel" + d.city).style(
-        "display",
-        "none")
+      d3.select("#cityLabel" + d.city).style("display", "none");
     });
 
   x.exit().remove();
-
-
 }
