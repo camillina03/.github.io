@@ -223,7 +223,7 @@ function updateStacked(order) {
     })
     .attr("fill", (d, i) => colorScale(i))
     .append("title")
-    .text((d) => d.value);
+    .text((d) => nf.format(d.value));
 }
 
 function updateGroupedBar(order) {
@@ -313,5 +313,5 @@ function updateGroupedBar(order) {
     })
     .attr("fill", (d, i) => colorScale(i))
     .append("title")
-    .text((d) => d.value);
+    .text((d) => nf.format(d.value));
 }
