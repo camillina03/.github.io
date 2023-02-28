@@ -102,7 +102,7 @@ function pieVis() {
 
     chart.on("mousemove", function (d) {
       tooltip.html(
-        "<br>Holocaust victimins<br><br>" +
+        "<br>Holocaust victimins<br>" +
           d3.select(this).datum().data.Nationality.toUpperCase() +
           "<br> " +
           d3.select(this).datum().data.Percentage +
@@ -203,7 +203,7 @@ function pieVis() {
       })
       .on("mousemove", function (d) {
         tooltip.html(
-          "<br> Holocaust victmins:<br><br>" +
+          "<br> Holocaust victmins:<br>" +
             d3.select(this).datum().Nationality.toUpperCase() +
             "<br>" +
             d3.select(this).datum().Percentage +

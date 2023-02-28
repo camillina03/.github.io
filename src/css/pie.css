@@ -30,10 +30,10 @@
   border-radius:100;
   padding: 2px 2px;
   font-family: "Roboto",sans-serif;
-  font: 20px bold;
+  font-size: 12px;
   color: rgba(88, 88, 88, 0.749);
-  left: 210px;
-  top: 210px;
+  left: 60px;
+  top: 245px;
   position: absolute;
   text-align: center;
   width: 210px;
