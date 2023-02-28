@@ -133,17 +133,15 @@ function CreateStackedBarchartDefault() {
 function Update(chosenB, order) {
   chosenBarchart = chosenB;
   if (chosenB == "Stacked") updateStacked(order);
-  else updateGroupedBar(order)
-
+  else updateGroupedBar(order);
 }
 
-
 function updateStacked(order) {
-
   var margin = { top: 20, right: 70, bottom: 20, left: 160 };
 
   var innerHeight = 600 - margin.top - margin.bottom;
-  var innerWidth = $("#stacked-container").width() - 80 - margin.left - margin.right;
+  var innerWidth =
+    $("#stacked-container").width() - 80 - margin.left - margin.right;
 
   var keys = ["army", "civilian"];
   max_value = d3.max(datasetDefaultStaked, function (d) {
@@ -159,13 +157,10 @@ function updateStacked(order) {
     datasetDefaultStaked.sort(function (a, b) {
       return a.total - b.total;
     });
-
-  }
-  else {
+  } else {
     datasetDefaultStaked.sort(function (a, b) {
       return b.total - a.total;
     });
-
   }
 
   y0Scale = d3
@@ -176,7 +171,7 @@ function updateStacked(order) {
       })
     )
     .range([0, innerHeight])
-    .padding(0.20);
+    .padding(0.2);
 
   y1Scale = d3
     .scaleBand()
@@ -214,49 +209,53 @@ function updateStacked(order) {
     .attr("fill", (d, i) => colorScale(i))
     .append("title")
     .text((d) => d.value);
-
 }
 
 function updateGroupedBar(order) {
-
   var margin = { top: 20, right: 70, bottom: 20, left: 160 };
 
   var innerHeight = 600 - margin.top - margin.bottom;
-  var innerWidth = $("#stacked-container").width() - 80 - margin.left - margin.right;
+  var innerWidth =
+    $("#stacked-container").width() - 80 - margin.left - margin.right;
 
-  var keysGrouped = ["civilianP", "armyP"];
+  var keysGrouped = ["civilian", "army"];
 
   //Generates x and y axis with range and domain and a colorScale for grouped  values
 
-  var xscale = d3.scaleLinear().domain([0, 100]).range([0, innerWidth]);
+  max_value = d3.max(datasetDefaultStaked, function (d) {
+    return d.civilian + d.army;
+  });
+  var xscale = d3.scaleLinear().domain([0, max_value]).range([0, innerWidth]);
 
-  yscale = d3.scaleBand()
-    .domain(datasetDefaultStaked.map(function (d) { return d.nationality; }))
-    .range([0, innerHeight]).padding(0.2)
+  yscale = d3
+    .scaleBand()
+    .domain(
+      datasetDefaultStaked.map(function (d) {
+        return d.nationality;
+      })
+    )
+    .range([0, innerHeight])
+    .padding(0.2)
     .paddingInner(0.06)
     .align(0.1);
 
-
-  zscale = d3.scaleOrdinal()
+  zscale = d3
+    .scaleOrdinal()
     .domain(keysGrouped)
     .range(["#d88484", "rgb(170, 42, 42)"]);
 
   //grouped d3 function
-  var grouped = d3.stack()
-    .keys(keysGrouped)
+  var grouped = d3.stack().keys(keysGrouped);
 
   // sort based on the  related button
   if (order == "Descending") {
     datasetDefaultStaked.sort(function (a, b) {
       return a.total - b.total;
     });
-
-  }
-  else {
+  } else {
     datasetDefaultStaked.sort(function (a, b) {
       return b.total - a.total;
     });
-
   }
 
   svgGlobalStacked
@@ -270,21 +269,34 @@ function updateGroupedBar(order) {
   svgGlobalStacked
     .select("#barsgroup")
     .selectAll("g")
-    .data(grouped(datasetDefaultStaked))
+    .data(datasetDefaultStaked, (d) => d.nationality)
     .join("g")
-    .attr("fill", function (d) { return zscale(d.key); })
-    .attr("transform", function (d) { "translate(0," + yscale(d.nationality) + ")" })
+    .attr("transform", (d) => "translate(0," + yscale(d.nationality) + ")")
     .selectAll("rect")
-    .data(function (d) { return d; })
+    .data((d) =>
+      ["army", "civilian"].map((key) => ({
+        key,
+        value: d[key],
+        nationality: d.nationality,
+      }))
+    )
     .join("rect")
     .on("mouseover", mouseover)
     .on("mouseleave", mouseleave)
-    .attr("x", function (d) { return xscale(d[0]); })
-    .attr("y", function (d) { return yscale(d.data.nationality); })
-    .attr("width", function (d) { return xscale(d[1]) - xscale(d[0]); })
+    .attr("x", (d) =>
+      d.key === "army"
+        ? 0
+        : xscale(
+            datasetDefaultStaked.find((x) => x.nationality === d.nationality)
+              .army
+          )
+    )
+    .attr("y", (d) => yscale(d.key))
     .attr("height", yscale.bandwidth())
+    .attr("width", function (d) {
+      return xscale(d.value) - xscale(0);
+    })
+    .attr("fill", (d, i) => colorScale(i))
     .append("title")
-    .text((d) => "Total: " + nf.format(d.data.total));
-
-
+    .text((d) => d.value);
 }
