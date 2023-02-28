@@ -3,7 +3,9 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 32px;
     position: relative;
 }
 
@@ -34,7 +36,7 @@ p {
 
 
 .filters .select-wrapper {
-    flex: 1;
+    /* flex: 1; */
 }
 
 
@@ -43,7 +45,7 @@ p {
 }
 
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
-    width: auto !important;
+    /* width: auto !important; */
 }
 
 text .label{
