@@ -85,7 +85,7 @@ function CreateStackedBarchartDefault() {
   $(window).resize(function () {
     if (svgGlobalStacked)
       svgGlobalStacked
-        .attr("width", $("#stacked-container").width() - 80)
+        .attr("width", $("#stacked-container").width())
         .attr("height", 600);
   });
 
