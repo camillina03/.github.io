@@ -315,7 +315,7 @@ function showcities() {
 
   var cityLabels = countriesGroup
     .selectAll("circle")
-    .data(citiesDataset)
+    .data(citiesDataset, (d) => d.city))
     .enter()
     .append("g")
     .attr("class", "countryLabel")
