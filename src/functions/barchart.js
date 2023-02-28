@@ -253,7 +253,7 @@ function UpdateBarchart(chosenBarchart, data) {
           .on("mouseover", mouseover)
           .on("mouseleave", mouseleave)
           .append("title")
-          .text((d) => nf.format(SelectData(findChosenBarchart(), d)),
+          .text((d) => nf.format(SelectData(findChosenBarchart(), d))),
 
       (update) =>
         update
@@ -272,6 +272,8 @@ function UpdateBarchart(chosenBarchart, data) {
           }),
       (exit) => exit.remove()
     );
+
+
 }
 
 /**
