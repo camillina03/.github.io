@@ -85,7 +85,7 @@ function CreateStackedBarchartDefault() {
   $(window).resize(function () {
     if (svgGlobalStacked)
       svgGlobalStacked
-        .attr("width", $("#stacked-container").width())
+        .attr("width", $("#stacked-container").width() - 80)
         .attr("height", 600);
   });
 
@@ -142,7 +142,6 @@ function updateStacked(order) {
 
   var margin = { top: 20, right: 70, bottom: 20, left: 160 };
 
-  var outerWidth = $("#stacked-container").width() - 80 + margin.left + margin.right;
   var innerHeight = 600 - margin.top - margin.bottom;
   var innerWidth = $("#stacked-container").width() - 80 - margin.left - margin.right;
 
@@ -176,7 +175,8 @@ function updateStacked(order) {
         return d.nationality;
       })
     )
-    .range([0, innerHeight]);
+    .range([0, innerHeight])
+    .padding(0.20);
 
   y1Scale = d3
     .scaleBand()
@@ -189,6 +189,7 @@ function updateStacked(order) {
   svgGlobalStacked
     .select("#xaxis")
     .attr("transform", "translate(0," + innerHeight + ")")
+
     .call(d3.axisBottom(xScale));
 
   svgGlobalStacked.select("#yaxis").call(d3.axisLeft(y0Scale));
@@ -222,7 +223,6 @@ function updateGroupedBar(order) {
 
   var innerHeight = 600 - margin.top - margin.bottom;
   var innerWidth = $("#stacked-container").width() - 80 - margin.left - margin.right;
-  var outerWidth = $("#stacked-container").width() - 80 + margin.left + margin.right;
 
   var keysGrouped = ["civilianP", "armyP"];
 
@@ -272,8 +272,8 @@ function updateGroupedBar(order) {
     .selectAll("g")
     .data(grouped(datasetDefaultStaked))
     .join("g")
-    .attr("transform", (d) => "translate(0," + yScale(d.nationality) + ")")
     .attr("fill", function (d) { return zscale(d.key); })
+    .attr("transform", function (d) { "translate(0," + yscale(d.nationality) + ")" })
     .selectAll("rect")
     .data(function (d) { return d; })
     .join("rect")
@@ -284,121 +284,7 @@ function updateGroupedBar(order) {
     .attr("width", function (d) { return xscale(d[1]) - xscale(d[0]); })
     .attr("height", yscale.bandwidth())
     .append("title")
-    .text((d) => d.value);
-
-
-}
-
-
-
-function stackedBaggggr() {
-
-  margin = { top: 40, right: 20, bottom: 5, left: 120 },
-    width = 800,
-    height = 600;
-  outerWidth = width + margin.left + margin.right;
-  outerHeight = height + margin.bottom + margin.top;
-  innerWidth = width - margin.left - margin.right;
-  innerHeight = height - margin.top - margin.bottom;
-
-
-
-  var svg = d3.select("#stacked")
-    .append('svg')
-    .attr("width", outerWidth)
-    .attr("height", outerHeight)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.bottom + ")");
-
-
-
-  //Reads data from tsv
-  d3.csv("../datasets/csv/army-citizien.csv")
-    .then(
-      function (data) {
-        //set up your data transforms here
-        data.forEach(function (d) {
-          d.nationality = d.nationality;
-          d.civilianP = +d.civilianP;
-          d.armyP = +d.armyP;
-          d.totalP = +d.totalP;
-
-        })
-
-        //Layers of stacked barchart
-        var keys = data.columns.slice(3, 5);
-
-        //Generates x and y axis with range and domain and a colorScale for stacked values
-        var xScale = d3.scaleLinear()
-          .domain([0, 100])
-          .rangeRound([0, innerWidth]);
-
-        yScale = d3.scaleBand()
-          .domain(data.map(function (d) { return d.nationality; }))
-          .rangeRound([0, innerHeight]).padding(0.2)
-          .paddingInner(0.05)
-          .align(0.1);
-
-        zScale = d3.scaleOrdinal()
-          .domain(keys)
-          .range(['#ff7f50', '#6495ed']);
-
-
-        //Stacked d3 function
-        var stacked = d3.stack()
-          .keys(keys)
-
-        data.sort(function (a, b) { return b.totalP - a.totalP; });
-
-        //Draw y axis 
-        svg.append("g")
-          //  .attr("class", "axis axis--y") 
-          .call(d3.axisLeft(yScale).ticks(20));
-
-        //Draw x axis 
-        svg.append("g")
-          //  .attr("class", "axis axis--x")
-          .attr("transform", "translate(0," + (innerHeight) + ")")
-          .call(d3.axisBottom(xScale))
-
-
-        //Draw stacked bars for each name and value in data
-        svg.append("g")
-          .selectAll("g")
-          .data(stacked(data))
-          .enter().append("g")
-          .attr("fill", function (d) { return zScale(d.key); })
-          .selectAll("rect")
-          .data(function (d) { return d; })
-          .enter().append("rect")
-          .attr("y", function (d) { return yScale(d.data.nationality); })
-          .attr("x", function (d) { return xScale(d[0]); })
-          .attr("width", function (d) { return xScale(d[1]) - xScale(d[0]); })
-          .attr("height", yScale.bandwidth());
-
-        var legend = svg.append("g")
-          .attr("font-family", "sans-serif")
-          .attr("font-size", 10)
-          .attr("text-anchor", "end")
-          .selectAll("g")
-          .data(keys.slice().reverse())
-          .enter().append("g")
-          //.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-          .attr("transform", function (d, i) { return "translate(-50," + (300 + i * 20) + ")"; });
-
-        legend.append("rect")
-          .attr("x", innerWidth + margin.right + margin.left)
-          .attr("y", -250)
-          .attr("width", 16)
-          .attr("height", 16)
-          .attr("fill", zScale);
-
-        legend.append("text")
-          .attr("x", innerWidth + margin.right + margin.left)
-          .attr("y", -295)
-          .attr("dy", "0.32em")
-          .text(function (d) { return d; });
-      });
+    .text((d) => "Total: " + nf.format(d.data.total));
 
 
 }

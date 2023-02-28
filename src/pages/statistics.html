@@ -26,7 +26,6 @@
    <!-- Script and css  -->
    <script src="../functions/piechart.js"></script>
    <script src="../functions/grouped.js"></script>
-   <script src="../functions/linechart1.js"></script>
    <script src="../functions/barchart.js"></script>
    <link href="../css/grouped.css" rel="stylesheet">
    <link href="../css/pie.css" rel="stylesheet">
@@ -54,18 +53,6 @@
          </ul>
       </nav>
    </header>
-
-   <div id="line">
-      <script>
-         // AlliesAxis();
-         // statesLine();
-      </script>
-   </div>
-   <!-- <div id="stackedBarchart">
-      <script type="text/javascript">
-         stackedBar();
-      </script>
-   </div> -->
 
    <!-- stacked Barchart-->
    <div id="stacked" class="chart-wrapper">
@@ -162,14 +149,14 @@
       <div class="btn-group sort-btn">
          <select class="selectpicker " id="selectStackedGroupedButton" data-style="btn-primary">
 
-            <option value="Stacked"> Stacked</option>
-            <option value="Grouped"> Grouped</option>
+            <option value="Stacked"> Show Grouped Chart</option>
+            <option value="Grouped"> Show Stacked Chart</option>
 
          </select>
          <select class="selectpicker" id="OrderByButtonStacked" data-style="btn-primary">
 
-            <option value="Descending"> Descending</option>
-            <option value="Ascending"> Ascending</option>
+            <option value="Descending">Order Descending</option>
+            <option value="Ascending"> Order Ascending</option>
          </select>
       </div>
 

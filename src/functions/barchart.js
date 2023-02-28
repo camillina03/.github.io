@@ -17,7 +17,6 @@ var initials = [
   "Italy",
   "Poland",
   "USA",
-  "United Kingdom",
   "Soviet Union",
   "Japan",
   "China",
@@ -133,7 +132,7 @@ function CreateBarchartDefault() {
     svgGlobal
       .append("g")
       .attr("class", "x axis")
-      .attr("transform", "translate(0," + 610 + ")")
+      .attr("transform", "translate(0," + 600 + ")")
       .call(d3.axisBottom(xScale))
       .selectAll("text")
       .attr("transform", "translate(-10,0)rotate(-45)")
