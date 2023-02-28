@@ -155,11 +155,11 @@ function updateStacked(order) {
   // sort based on the  related button
   if (order == "Descending") {
     datasetDefaultStaked.sort(function (a, b) {
-      return a.total - b.total;
+      return b.total - a.total;
     });
   } else {
     datasetDefaultStaked.sort(function (a, b) {
-      return b.total - a.total;
+      return a.total - b.total;
     });
   }
 
