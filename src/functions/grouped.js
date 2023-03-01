@@ -221,19 +221,20 @@ function updateStacked(order) {
     .attr("width", function (d) {
       return xScale(d.value) - xScale(0);
     })
-    .attr("fill", (d, i) => colorScale(i));
-
+    .attr("fill", (d, i) => colorScale(i))
+    .selectAll("title")
+    .remove();
 
   svgGlobalStacked
     .select("#barsgroup")
     .selectAll("g")
     .data(datasetDefaultStaked)
+    .join("g")
     .selectAll("rect")
     .data((d) => keys.map((key) => ({ key, value: d[key] })))
-    .join("title")
+    .join("rect")
     .append("title")
     .text((d) => nf.format(d.value));
-
 
 }
 
@@ -322,16 +323,19 @@ function updateGroupedBar(order) {
     .attr("width", function (d) {
       return xscale(d.value) - xscale(0);
     })
-    .attr("fill", (d, i) => colorScale(i));
+    .attr("fill", (d, i) => colorScale(i))
+    .selectAll("title")
+    .remove()
 
 
   svgGlobalStacked
     .select("#barsgroup")
     .selectAll("g")
     .data(datasetDefaultStaked)
+    .join("g")
     .selectAll("rect")
-    .data((d) => keysGrouped.map((key) => ({ key, value: d[key] })))
-    .join("title")
+    .data((d) => keys.map((key) => ({ key, value: d[key] })))
+    .join("rect")
     .append("title")
     .text((d) => nf.format(d.value));
 
