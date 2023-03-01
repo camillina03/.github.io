@@ -52,6 +52,121 @@
     </nav>
   </header>
 
+  <!-- barchart -->
+  <div id="barchart" class="chart-wrapper">
+    <h2>Absolute and percentage Statistics for country</h2>
+    <p>
+      Choose the statistic you want to see, for each country: absolute number
+      of victims,number of victims as a percentage on the population of the
+      chosen country and number of victims as a percentage of the total war
+      deaths.
+    </p>
+
+    <div class="filters">
+      <!-- country selector-->
+      <div class="select-wrapper">
+        <select class="selectpicker selectorBarchartStyle" id="selectorBarchart" multiple data-live-search="true"
+          data-actions-box="true" data-selected-text-format="count > 2" title="Choose coutries..">
+          <option value="Albania">Albania</option>
+          <option value="Australia">Australia</option>
+          <option value="Austria">Austria</option>
+          <option value="Belgium">Belgium</option>
+          <option value="Brazil">Brazil</option>
+          <option value="Bulgaria">Bulgaria</option>
+          <option value="Burma">Burma</option>
+          <option value="Canada">Canada</option>
+          <option value="China">China</option>
+          <option value="Cuba">Cuba</option>
+          <option value="Czechoslovakia">Czechoslovakia</option>
+          <option value="Denmark">Denmark</option>
+          <option value="Dutch East Indies">Dutch East Indies</option>
+          <option value="Estonia">Estonia</option>
+          <option value="Ethiopia">Ethiopia</option>
+          <option value="Finland">Finland</option>
+          <option value="France">France</option>
+          <option value="French Indochina">French Indochina</option>
+          <option value="Germany">Germany</option>
+          <option value="Greece">Greece</option>
+          <option value="Hungary">Hungary</option>
+          <option value="Iceland">Iceland</option>
+          <option value="India">India</option>
+          <option value="Iran">Iran</option>
+          <option value="Iraq">Iraq</option>
+          <option value="Ireland">Ireland</option>
+          <option value="Italy">Italy</option>
+          <option value="Japan">Japan</option>
+          <option value="Korea">Korea</option>
+          <option value="Latvia">Latvia</option>
+          <option value="Lithuania">Lithuania</option>
+          <option value="Luxembourg">Luxembourg</option>
+          <option value="Malaya">Malaya</option>
+          <option value="Malta">Malta</option>
+          <option value="Mexico">Mexico</option>
+          <option value="Mongolia">Mongolia</option>
+          <option value="Nauru (Australian)">Nauru (Australian)</option>
+          <option value="Netherlands">Netherlands</option>
+          <option value="New Zealand">New Zealand</option>
+          <option value="Newfoundland">Newfoundland</option>
+          <option value="Norway">Norway</option>
+          <option value="Papua New Guinea">
+            Papua New Guinea
+          </option>
+          <option value="Philippines">Philippines</option>
+          <option value="Poland">Poland</option>
+          <option value="Portuguese Timor">Portuguese Timor</option>
+          <option value="Romania">Romania</option>
+          <option value="Ruanda(BE)">
+            Ruanda(BE)
+          </option>
+          <option value="Singapore">Singapore</option>
+          <option value="South Africa">South Africa</option>
+          <option value="South Pac Mandate">
+            South Pac Mandate
+          </option>
+          <option value="Soviet Union">Soviet Union</option>
+          <option value="Sweden">Sweden</option>
+          <option value="Switzerland">Switzerland</option>
+          <option value="Thailand">Thailand</option>
+          <option value="Turkey">Turkey</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="United States">United States</option>
+          <option value="Yugoslavia">Yugoslavia</option>
+        </select>
+
+        <p class="hint" id="warningParagraph">
+          Please choose from 5 up to 15 countries
+        </p>
+      </div>
+
+      <button type="submit" id="saveButtonForMultiselection" class="btn btn-light">
+        Submit
+      </button>
+    </div>
+    <div>
+      <input type="radio" id="barchart1" onclick="UpdateBarchart(0,datasetDefault)" checked name="barchart_selection">
+      <label for="barchart1">Absolute</label>
+
+      <input type="radio" id="barchart2" onclick="UpdateBarchart(1,datasetDefault)" name="barchart_selection">
+      <label for="barchart2">% on population</label>
+
+      <input type="radio" id="barchart3" onclick="UpdateBarchart(2,datasetDefault)" name="barchart_selection">
+      <label for="barchart3">% on total</label>
+    </div>
+
+    <div class="btn-group sort-btn">
+      <select class="selectpicker" id="SortByButton" data-style="btn-primary">
+        <option value="SortByDeaths">Sort By Deaths</option>
+        <option value="SortByName">Sort By Name</option>
+      </select>
+      <select class="selectpicker" id="OrderByButton" data-style="btn-primary">
+        <option value="Ascending">Ascending</option>
+        <option value="Descending">Descending</option>
+
+      </select>
+    </div>
+    <div id="barchart-container"></div>
+  </div>
+
   <!-- stacked Barchart-->
   <div id="stacked" class="chart-wrapper">
     <h2>Soldiers vs Civilian victims by country</h2>
@@ -113,20 +228,20 @@
           <option value="New Zealand">New Zealand</option>
           <option value="Newfoundland">Newfoundland</option>
           <option value="Norway">Norway</option>
-          <option value="Papua and New Guinea (Australian)">
-            Papua and New Guinea (Australian)
+          <option value="Papua New Guinea">
+            Papua New Guinea
           </option>
           <option value="Philippines">Philippines</option>
           <option value="Poland">Poland</option>
           <option value="Portuguese Timor">Portuguese Timor</option>
           <option value="Romania">Romania</option>
-          <option value="Ruanda-Urundi (Belgian)">
-            Ruanda-Urundi (Belgian)
+          <option value="Ruanda(BE)">
+            Ruanda(BE)
           </option>
           <option value="Singapore">Singapore</option>
           <option value="South Africa">South Africa</option>
-          <option value="South Pacific Mandate (Japanese)">
-            South Pacific Mandate (Japanese)
+          <option value="South Pac Mandate">
+            South Pac Mandate
           </option>
           <option value="Soviet Union">Soviet Union</option>
           <option value="Sweden">Sweden</option>
@@ -171,121 +286,6 @@
       holocaust deaths. Hold the mouse over the slice or on the legend to see
       more info.
     </p>
-  </div>
-
-  <!-- barchart -->
-  <div id="barchart" class="chart-wrapper">
-    <h2>Absolute and percentage Statistics for country</h2>
-    <p>
-      Choose the statistic you want to see, for each country: absolute number
-      of victims,number of victims as a percentage on the population of the
-      chosen country and number of victims as a percentage of the total war
-      deaths.
-    </p>
-
-    <div class="filters">
-      <!-- country selector-->
-      <div class="select-wrapper">
-        <select class="selectpicker selectorBarchartStyle" id="selectorBarchart" multiple data-live-search="true"
-          data-actions-box="true" data-selected-text-format="count > 2" title="Choose coutries..">
-          <option value="Albania">Albania</option>
-          <option value="Australia">Australia</option>
-          <option value="Austria">Austria</option>
-          <option value="Belgium">Belgium</option>
-          <option value="Brazil">Brazil</option>
-          <option value="Bulgaria">Bulgaria</option>
-          <option value="Burma">Burma</option>
-          <option value="Canada">Canada</option>
-          <option value="China">China</option>
-          <option value="Cuba">Cuba</option>
-          <option value="Czechoslovakia">Czechoslovakia</option>
-          <option value="Denmark">Denmark</option>
-          <option value="Dutch East Indies">Dutch East Indies</option>
-          <option value="Estonia">Estonia</option>
-          <option value="Ethiopia">Ethiopia</option>
-          <option value="Finland">Finland</option>
-          <option value="France">France</option>
-          <option value="French Indochina">French Indochina</option>
-          <option value="Germany">Germany</option>
-          <option value="Greece">Greece</option>
-          <option value="Hungary">Hungary</option>
-          <option value="Iceland">Iceland</option>
-          <option value="India">India</option>
-          <option value="Iran">Iran</option>
-          <option value="Iraq">Iraq</option>
-          <option value="Ireland">Ireland</option>
-          <option value="Italy">Italy</option>
-          <option value="Japan">Japan</option>
-          <option value="Korea">Korea</option>
-          <option value="Latvia">Latvia</option>
-          <option value="Lithuania">Lithuania</option>
-          <option value="Luxembourg">Luxembourg</option>
-          <option value="Malaya">Malaya</option>
-          <option value="Malta">Malta</option>
-          <option value="Mexico">Mexico</option>
-          <option value="Mongolia">Mongolia</option>
-          <option value="Nauru (Australian)">Nauru (Australian)</option>
-          <option value="Netherlands">Netherlands</option>
-          <option value="New Zealand">New Zealand</option>
-          <option value="Newfoundland">Newfoundland</option>
-          <option value="Norway">Norway</option>
-          <option value="Papua and New Guinea (Australian)">
-            Papua and New Guinea (Australian)
-          </option>
-          <option value="Philippines">Philippines</option>
-          <option value="Poland">Poland</option>
-          <option value="Portuguese Timor">Portuguese Timor</option>
-          <option value="Romania">Romania</option>
-          <option value="Ruanda-Urundi (Belgian)">
-            Ruanda-Urundi (Belgian)
-          </option>
-          <option value="Singapore">Singapore</option>
-          <option value="South Africa">South Africa</option>
-          <option value="South Pacific Mandate (Japanese)">
-            South Pacific Mandate (Japanese)
-          </option>
-          <option value="Soviet Union">Soviet Union</option>
-          <option value="Sweden">Sweden</option>
-          <option value="Switzerland">Switzerland</option>
-          <option value="Thailand">Thailand</option>
-          <option value="Turkey">Turkey</option>
-          <option value="United Kingdom">United Kingdom</option>
-          <option value="United States">United States</option>
-          <option value="Yugoslavia">Yugoslavia</option>
-        </select>
-
-        <p class="hint" id="warningParagraph">
-          Please choose from 5 up to 15 countries
-        </p>
-      </div>
-
-      <button type="submit" id="saveButtonForMultiselection" class="btn btn-light">
-        Submit
-      </button>
-    </div>
-    <div>
-      <input type="radio" id="barchart1" onclick="UpdateBarchart(0,datasetDefault)" checked name="barchart_selection">
-      <label for="barchart1">Absolute</label>
-
-      <input type="radio" id="barchart2" onclick="UpdateBarchart(1,datasetDefault)" name="barchart_selection">
-      <label for="barchart2">% on population</label>
-
-      <input type="radio" id="barchart3" onclick="UpdateBarchart(2,datasetDefault)" name="barchart_selection">
-      <label for="barchart3">% on total</label>
-    </div>
-
-    <div class="btn-group sort-btn">
-      <select class="selectpicker" id="SortByButton" data-style="btn-primary">
-        <option value="SortByDeaths">Sort By Deaths</option>
-        <option value="SortByName">Sort By Name</option>
-      </select>
-      <select class="selectpicker" id="OrderByButton" data-style="btn-primary">
-        <option value="Ascending">Ascending</option>
-        <option value="Descending">Descending</option>
-
-      </select>
-    </div>
-    <div id="barchart-container"></div>
   </div>
 
   <!-- footer-->

@@ -118,7 +118,7 @@ function CreateStackedBarchartDefault() {
     //default sorting is  descending by deaths number
 
     datasetFromCsvStacked.sort(function (a, b) {
-      return a.total - b.total;
+      return ((a.civilian + a.army) - (b.civilian + b.army));
     });
 
     //select 10 meaningful country in the dataset as default data when the page is loaded
@@ -170,11 +170,11 @@ function updateStacked(order) {
   // sort based on the  related button
   if (order == "Descending") {
     datasetDefaultStaked.sort(function (a, b) {
-      return b.total - a.total;
+      return ((b.civilian + b.army) - (a.civilian + a.army));
     });
   } else {
     datasetDefaultStaked.sort(function (a, b) {
-      return a.total - b.total;
+      return ((a.civilian + a.army) - (b.civilian + b.army));
     });
   }
 
@@ -221,9 +221,20 @@ function updateStacked(order) {
     .attr("width", function (d) {
       return xScale(d.value) - xScale(0);
     })
-    .attr("fill", (d, i) => colorScale(i))
+    .attr("fill", (d, i) => colorScale(i));
+
+
+  svgGlobalStacked
+    .select("#barsgroup")
+    .selectAll("g")
+    .data(datasetDefaultStaked)
+    .selectAll("rect")
+    .data((d) => keys.map((key) => ({ key, value: d[key] })))
+    .join("title")
     .append("title")
     .text((d) => nf.format(d.value));
+
+
 }
 
 function updateGroupedBar(order) {
@@ -269,7 +280,7 @@ function updateGroupedBar(order) {
     });
   } else {
     datasetDefaultStaked.sort(function (a, b) {
-      return b.total - a.total;
+      return ((b.civilian + b.army) - (a.civilian + a.army));
     });
   }
 
@@ -302,16 +313,28 @@ function updateGroupedBar(order) {
       d.key === "army"
         ? 0
         : xscale(
-            datasetDefaultStaked.find((x) => x.nationality === d.nationality)
-              .army
-          )
+          datasetDefaultStaked.find((x) => x.nationality === d.nationality)
+            .army
+        )
     )
     .attr("y", (d) => yscale(d.key))
     .attr("height", yscale.bandwidth())
     .attr("width", function (d) {
       return xscale(d.value) - xscale(0);
     })
-    .attr("fill", (d, i) => colorScale(i))
+    .attr("fill", (d, i) => colorScale(i));
+
+
+  svgGlobalStacked
+    .select("#barsgroup")
+    .selectAll("g")
+    .data(datasetDefaultStaked)
+    .selectAll("rect")
+    .data((d) => keys.map((key) => ({ key, value: d[key] })))
+    .join("title")
     .append("title")
     .text((d) => nf.format(d.value));
+
+
+
 }

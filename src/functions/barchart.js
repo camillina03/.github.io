@@ -47,6 +47,7 @@ $(document).ready(function () {
 
       $("#selectorBarchart").selectpicker("refresh");
       UpdateBarchartWithChosenCountries(chosenCountries);
+      SortByFunction($("#SortByButton").val(), $("#OrderByButton").val());
       $(function () {
         $("#selectorBarchart").selectpicker();
       });
