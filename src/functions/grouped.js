@@ -334,7 +334,7 @@ function updateGroupedBar(order) {
     .data(datasetDefaultStaked)
     .join("g")
     .selectAll("rect")
-    .data((d) => keys.map((key) => ({ key, value: d[key] })))
+    .data((d) => keysGrouped.map((key) => ({ key, value: d[key] })))
     .join("rect")
     .append("title")
     .text((d) => nf.format(d.value));
