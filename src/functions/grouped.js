@@ -32,6 +32,10 @@ var chosenStackedCountries = [
   "China",
   "Germany",
   "Dutch East Indies",
+  "Burma",
+  "Korea",
+  "India"
+
 ];
 
 $(document).ready(function () {
@@ -44,7 +48,7 @@ $(document).ready(function () {
     if (ValidateInputStacked(chosenStackedCountries)) {
       $("#warningParagraphstacked").text("Please select at least 10 countries");
       $("#warningParagraphstacked").css("color", "gainsboro");
-      $(".btn-light").css("border", "transparent");
+      $("#saveButtonForMultiselectionstacked").css("border", "transparent");
 
       datasetDefaultStaked = datasetFromCsvStacked.filter((d) =>
         chosenStackedCountries.includes(d.nationality)
@@ -58,7 +62,7 @@ $(document).ready(function () {
         "Wrong number of country chosen! Please select at least 10 countries"
       );
       $("#warningParagraphstacked").css("color", "red");
-      $(".btn-light").css("border", "1.5px solid red");
+      $("#saveButtonForMultiselectionstacked").css("border", "1.5px solid red");
     }
   });
 
@@ -138,7 +142,10 @@ function CreateStackedBarchartDefault() {
         d.nationality == "Japan" ||
         d.nationality == "China" ||
         d.nationality == "Germany" ||
-        d.nationality == "Dutch East Indies"
+        d.nationality == "Dutch East Indies" ||
+        d.nationality == "Burma" ||
+        d.nationality == "Korea" ||
+        d.nationality == "India"
     );
 
     svgGlobalStacked.append("g").attr("id", "barsgroup");

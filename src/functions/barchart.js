@@ -48,7 +48,7 @@ $(document).ready(function () {
     if (ValidateInput(chosenCountries)) {
       $("#warningParagraph").text("Please select at least 10 countries");
       $("#warningParagraph").css("color", "gainsboro");
-      $(".btn-light").css("border", "transparent");
+      $("#saveButtonForMultiselection").css("border", "transparent");
 
       $("#selectorBarchart").selectpicker("refresh");
       UpdateBarchartWithChosenCountries(chosenCountries);
@@ -61,7 +61,7 @@ $(document).ready(function () {
         "Wrong number of country chosen! Please select at least 10 countries"
       );
       $("#warningParagraph").css("color", "red");
-      $(".btn-light").css("border", "1.5px solid red");
+      $("#saveButtonForMultiselection").css("border", "1.5px solid red");
       // $('#saveButtonForMultiselection').css("border", "3px solid red");
     }
   });
