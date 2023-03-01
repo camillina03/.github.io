@@ -30,6 +30,11 @@ var initials = [
   "China",
   "Germany",
   "Dutch East Indies",
+  "Burma",
+  "Korea",
+  "India",
+  "Grecia",
+  "Yugoslavia"
 ];
 
 /**
@@ -128,7 +133,14 @@ function CreateBarchartDefault() {
         d.Nationality == "Japan" ||
         d.Nationality == "China" ||
         d.Nationality == "Germany" ||
-        d.Nationality == "Dutch East Indies"
+        d.Nationality == "Dutch East Indies" ||
+        d.Nationality == "Burma" ||
+        d.Nationality == "Korea" ||
+        d.Nationality == "India" ||
+        d.Nationality == "Grecia" ||
+        d.Nationality == "Yugoslavia"
+
+        
     );
 
     // Add X scale, X axis and X labels
