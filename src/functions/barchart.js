@@ -46,7 +46,7 @@ $(document).ready(function () {
   $("#saveButtonForMultiselection").click(function () {
     chosenCountries = $("#selectorBarchart").val();
     if (ValidateInput(chosenCountries)) {
-      $("#warningParagraph").text("Please select at least 5 countries");
+      $("#warningParagraph").text("Please select at least 10 countries");
       $("#warningParagraph").css("color", "gainsboro");
       $(".btn-light").css("border", "transparent");
 
@@ -58,7 +58,7 @@ $(document).ready(function () {
       });
     } else {
       $("#warningParagraph").text(
-        "Wrong number of country chosen! Please select at least 5 countries"
+        "Wrong number of country chosen! Please select at least 10 countries"
       );
       $("#warningParagraph").css("color", "red");
       $(".btn-light").css("border", "1.5px solid red");
@@ -140,7 +140,7 @@ function CreateBarchartDefault() {
         d.Nationality == "Grecia" ||
         d.Nationality == "Yugoslavia"
 
-        
+
     );
 
     // Add X scale, X axis and X labels
@@ -321,7 +321,7 @@ function findChosenBarchart() {
  * It validates the number of country selected
  */
 function ValidateInput(chosenCountries) {
-  if (chosenCountries.length < 5) return false;
+  if (chosenCountries.length < 10) return false;
   return true;
 }
 /**

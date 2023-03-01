@@ -41,8 +41,8 @@ $(document).ready(function () {
 
   $("#saveButtonForMultiselectionstacked").click(function () {
     var chosenStackedCountries = $("#selectorStackedsbarchart").val();
-    if (ValidateInput(chosenStackedCountries)) {
-      $("#warningParagraphstacked").text("Please select at least 5 countries");
+    if (ValidateInputStacked(chosenStackedCountries)) {
+      $("#warningParagraphstacked").text("Please select at least 10 countries");
       $("#warningParagraphstacked").css("color", "gainsboro");
       $(".btn-light").css("border", "transparent");
 
@@ -55,7 +55,7 @@ $(document).ready(function () {
       );
     } else {
       $("#warningParagraphstacked").text(
-        "Wrong number of country chosen! Please select at least 5 countries"
+        "Wrong number of country chosen! Please select at least 10 countries"
       );
       $("#warningParagraphstacked").css("color", "red");
       $(".btn-light").css("border", "1.5px solid red");
@@ -76,6 +76,11 @@ $(document).ready(function () {
     );
   });
 });
+
+function ValidateInputStacked(chosenCountries) {
+  if (chosenCountries.length < 10) return false;
+  return true;
+}
 
 function CreateStackedBarchartDefault() {
   // set the dimensions and margins of the graph
