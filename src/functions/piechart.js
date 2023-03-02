@@ -102,13 +102,13 @@ function pieVis() {
 
     chart.on("mousemove", function (d) {
       tooltip.html(
-        "<br>Holocaust victimins<br>" +
-          d3.select(this).datum().data.Nationality.toUpperCase() +
-          "<br> " +
-          d3.select(this).datum().data.Percentage +
-          "%" +
-          "<br>" +
-          nf.format(d3.select(this).datum().data.Deaths)
+        "<br>Holocaust victimns<br>" +
+        d3.select(this).datum().data.Nationality.toUpperCase() +
+        "<br> " +
+        d3.select(this).datum().data.Percentage +
+        "%" +
+        "<br>" +
+        nf.format(d3.select(this).datum().data.Deaths)
       );
     });
 
@@ -203,13 +203,13 @@ function pieVis() {
       })
       .on("mousemove", function (d) {
         tooltip.html(
-          "<br> Holocaust victmins:<br>" +
-            d3.select(this).datum().Nationality.toUpperCase() +
-            "<br>" +
-            d3.select(this).datum().Percentage +
-            "%" +
-            "<br>" +
-            nf.format(d3.select(this).datum().Deaths)
+          "<br> Holocaust victimns:<br>" +
+          d3.select(this).datum().Nationality.toUpperCase() +
+          "<br>" +
+          d3.select(this).datum().Percentage +
+          "%" +
+          "<br>" +
+          nf.format(d3.select(this).datum().Deaths)
         );
       })
       .on("mouseout", function (d) {
