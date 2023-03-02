@@ -38,7 +38,7 @@ header nav ul li a:hover, a:focus, a:active {
     text-decoration: none;
 }
 header nav ul li a {
-    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    font-family: "Roboto",sans-serif;
     text-decoration: none;
     transition: color 0.1s, background-color 0.1s;
 }
